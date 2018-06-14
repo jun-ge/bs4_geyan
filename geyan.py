@@ -74,11 +74,16 @@ def get_details(url):
 
 
 if __name__ == '__main__':
+    from multiprocessing import Pool, Queue
+    pool = Pool(processes=8)#开启有8个进程的进程池
     for main_url in get_main_categories(BASE_URL):
         print(main_url)  # 打印出主目录[名称，分页面首页地址]
-        for url in get_subdirectorys_urls(main_url[1]):
+        for url in pool.apply_async(get_subdirectorys_urls, (main_url[1],)).get():#进程非阻塞执行。并通过get的到结果
             print(url)  # 打印每个分页地址
             for subdirectory in get_subdirectorys(url):
                 print(subdirectory)  # 打印出每个分页上面的二级目录的[名称，详情页地址地址】
                 for content in get_details(subdirectory[1]):
                     print(content)  # 打印出详情页内容
+
+        pool.close()
+        pool.join()
