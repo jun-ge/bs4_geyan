@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 
@@ -839,3 +840,9 @@ pip install -f &lt; requirement.txt</p>
   </body>
 </html>
 
+=======
+# bs4_geyan
+
+搭建依赖的库
+pip install -f < requirement.txt
+>>>>>>> 002c0d043c17e95e62c7c8fd4d25736c12268c8c
